@@ -5,7 +5,7 @@ string soru = Helper.AskQuestion();
 string answer = Helper.AskQuestionAnswer(soru).ToUpper();
 int userfalse =8;
 List<char> dogruTahminler = new List<char>();
-while (userfalse >= 3)
+while (userfalse > 3)
 {
     Console.Clear();
     Console.WriteLine("Kalan hak: " + (userfalse-3));
@@ -29,9 +29,25 @@ while (userfalse >= 3)
         Console.WriteLine("Tebrikler! Doğru bildiniz!");
         break;
     }
+    char tahmin;
 
-    Console.Write("Bir harf tahmin et: ");
-    char tahmin = Console.ReadLine().ToUpper()[0];
+    while (true)
+    {
+        Console.Write("Bir harf tahmin et: ");
+        string giris = Console.ReadLine().Trim().ToUpper();
+
+        
+        if (giris.Length == 1 && char.IsLetter(giris[0]))
+        {
+            tahmin = giris[0];
+            break;
+        }
+        else
+        {
+            Console.WriteLine(" Lütfen sadece **bir harf** girin. Rakam, boşluk girişi geçersizdir.");
+            Thread.Sleep(1000); 
+        }
+    }
 
     if (answer.Contains(tahmin))
     {
